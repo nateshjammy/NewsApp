@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.news.app"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+
+    }
+}
+
+dependencies {
+
+    //libs
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+
+    // Android
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.core:core-ktx:$corektx"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    //remove if navigation component is not used anywhere in future.
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+
+    // Google
+    implementation "com.google.android.material:material:$material_design"
+    implementation "com.google.dagger:hilt-android:" + rootProject.hilt
+    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hilt
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    //Room
+    implementation "androidx.room:room-runtime:" +roomVersion
+    kapt"androidx.room:room-compiler:" +roomVersion
+    implementation "androidx.room:room-ktx:" +roomVersion
+
+    //timper
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+
+}
